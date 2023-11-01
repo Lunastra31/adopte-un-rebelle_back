@@ -22,4 +22,6 @@ public class Starship extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private StarshipStatus starshipStatus;
 
+    @OneToOne
+    private Pilot pilot;
 }
