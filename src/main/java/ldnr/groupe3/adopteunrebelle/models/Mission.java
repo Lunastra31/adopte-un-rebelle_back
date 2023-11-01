@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Mission")
+@Table(name = "mission")
 public class Mission extends AbstractEntity{
 
     private String name;
@@ -22,8 +23,8 @@ public class Mission extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private MissionType missionType;
 
-    @OneToMany
-    private Pilot pilot;
+    @OneToMany(mappedBy = "mission")
+    private List<Pilot> pilots;
 
     private Integer flightHours;
 

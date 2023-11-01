@@ -37,5 +37,9 @@ public class Pilot extends AbstractEntity{
     @OneToOne
     private Starship starship;
 
+    @ManyToOne
+    @JoinColumn(name = "id_mission")
+    private Mission mission;
+
 
 }
