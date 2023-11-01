@@ -1,0 +1,25 @@
+package ldnr.groupe3.adopteunrebelle.models;
+
+import ldnr.groupe3.adopteunrebelle.models.enums.StarshipStatus;
+import ldnr.groupe3.adopteunrebelle.models.enums.StarshipType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import javax.persistence.*;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "starship")
+public class Starship extends AbstractEntity{
+    @Enumerated(EnumType.STRING)
+    private StarshipType starshipType;
+
+    @Enumerated(EnumType.STRING)
+    private StarshipStatus starshipStatus;
+
+}
