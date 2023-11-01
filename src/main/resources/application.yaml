@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/adopte-un-rebelle
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: mysql
+    database-platform: org.hebernate.dialect.MariaDBDialect
