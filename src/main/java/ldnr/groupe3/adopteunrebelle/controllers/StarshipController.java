@@ -11,6 +11,7 @@ import java.util.List;
 @RestController // Maintenant je peux connecter au controlleur avec http://localhost:8080
 @RequestMapping("/starship")// je veux acceder à ce controlleur depuis http://localhost:8080/starship
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class StarshipController {
     private final StarshipService starshipService;
 
