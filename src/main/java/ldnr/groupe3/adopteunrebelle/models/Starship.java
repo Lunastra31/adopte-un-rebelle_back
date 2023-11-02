@@ -16,6 +16,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "starship")
 public class Starship extends AbstractEntity{
+
+    private String name;
+
     @Enumerated(EnumType.STRING)
     private StarshipType starshipType;
 
