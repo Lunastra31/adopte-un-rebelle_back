@@ -37,4 +37,34 @@ public class PilotImpl implements PilotService {
     public void delete(Integer id) {
         pilotRepository.deleteById(id);
     }
+
+    @Override
+    public void createPilot() {
+
+    }
+
+    @Override
+    public String getAllApprenticePilot() {
+        return null;
+    }
+
+    @Override
+    public String getAllPilot() {
+        return null;
+    }
+
+    @Override
+    public String getAllAvailablePilot() {
+        return null;
+    }
+
+    @Override
+    public String getAllWoundedPilot() {
+        return null;
+    }
+
+    @Override
+    public String getAllDeadPilot() {
+        return null;
+    }
 }

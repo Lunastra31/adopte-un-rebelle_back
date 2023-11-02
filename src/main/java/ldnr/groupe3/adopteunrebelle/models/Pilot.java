@@ -10,7 +10,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @SuperBuilder
@@ -21,6 +22,8 @@ import java.time.LocalDateTime;
 public class Pilot extends AbstractEntity{
     private String name;
     private String surname;
+
+    private boolean isTrainee;
 
     @Enumerated(EnumType.STRING)
     private PilotBreed pilotBreed;
@@ -37,9 +40,11 @@ public class Pilot extends AbstractEntity{
     @OneToOne
     private Starship starship;
 
-    @ManyToOne
-    @JoinColumn(name = "id_mission")
-    private Mission mission;
+    @ManyToMany
+    @JoinTable(name = "pilot_mission",
+            joinColumns = @JoinColumn(name = "pilot_id"),
+            inverseJoinColumns = @JoinColumn(name = "mission_id"))
+    private Set<Mission> pilots = new HashSet<Mission>();
 
 
 }

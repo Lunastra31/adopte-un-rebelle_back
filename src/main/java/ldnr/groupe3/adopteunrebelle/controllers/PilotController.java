@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/pilot")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:'4200")
+
 public class PilotController {
     private final PilotService pilotService;
 

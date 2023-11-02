@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Data
 @SuperBuilder
@@ -23,8 +25,8 @@ public class Mission extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private MissionType missionType;
 
-    @OneToMany(mappedBy = "mission")
-    private List<Pilot> pilots;
+    @ManyToMany(mappedBy = "missions")
+    private Set<Pilot> pilots = new HashSet<Pilot>();
 
     private Integer flightHours;
 
