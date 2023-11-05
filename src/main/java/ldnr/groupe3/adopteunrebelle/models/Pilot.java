@@ -36,6 +36,8 @@ public class Pilot extends AbstractEntity{
 
     private Integer flightHours;
 
+    private int EndedMissionCount;
+
     @Enumerated(EnumType.STRING)
     private PilotStatus pilotStatus;
 

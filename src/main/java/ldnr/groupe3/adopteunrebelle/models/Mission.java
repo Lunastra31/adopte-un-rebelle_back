@@ -22,6 +22,7 @@ import java.util.Set;
 public class Mission extends AbstractEntity{
 
     private String name;
+    private int selectPilotCount;
 
     @Enumerated(EnumType.STRING)
     private MissionType missionType;
