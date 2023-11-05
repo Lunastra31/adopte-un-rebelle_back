@@ -1,13 +1,16 @@
 package ldnr.groupe3.adopteunrebelle.services.impl;
 
 import ldnr.groupe3.adopteunrebelle.models.Mission;
+import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.repositories.MissionRepository;
+import ldnr.groupe3.adopteunrebelle.repositories.PilotRepository;
 import ldnr.groupe3.adopteunrebelle.services.MissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +37,16 @@ public class MissionImpl implements MissionService {
     public void delete(Integer id) {
         missionRepository.deleteById(id);
     }
+
+    public void affectPilot(Integer id, List<Pilot> pilots){
+        Mission mission = missionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No mission has been found with the given ID :" + id));
+        mission.setPilots(pilots);
+    }
+
+
+    @Override
+    public void endMission() {
+
+    }
+
 }

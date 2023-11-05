@@ -1,12 +1,15 @@
 package ldnr.groupe3.adopteunrebelle.services.impl;
 
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
+import ldnr.groupe3.adopteunrebelle.models.Starship;
 import ldnr.groupe3.adopteunrebelle.repositories.PilotRepository;
 import ldnr.groupe3.adopteunrebelle.repositories.StarshipRepository;
 import ldnr.groupe3.adopteunrebelle.services.PilotService;
 import ldnr.groupe3.adopteunrebelle.services.StarshipService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -38,33 +41,19 @@ public class PilotImpl implements PilotService {
         pilotRepository.deleteById(id);
     }
 
-    @Override
-    public void createPilot() {
 
+    @Override
+    @Transactional
+    public void affectStarship(Starship starship, Integer id){
+        Pilot pilot = pilotRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id:" + id));
+        pilot.setStarship(starship);
     }
 
     @Override
-    public String getAllApprenticePilot() {
-        return null;
+    @Transactional
+    public void desaffectStarship (Integer id){
+        Pilot pilot = pilotRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id:" + id));
+        pilot.setStarship(null);
     }
 
-    @Override
-    public String getAllPilot() {
-        return null;
-    }
-
-    @Override
-    public String getAllAvailablePilot() {
-        return null;
-    }
-
-    @Override
-    public String getAllWoundedPilot() {
-        return null;
-    }
-
-    @Override
-    public String getAllDeadPilot() {
-        return null;
-    }
 }
