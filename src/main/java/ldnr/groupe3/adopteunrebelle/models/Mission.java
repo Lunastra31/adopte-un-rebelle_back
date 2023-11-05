@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 @Data
 @SuperBuilder
@@ -23,7 +26,10 @@ public class Mission extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private MissionType missionType;
 
-    @OneToMany(mappedBy = "mission")
+    @ManyToMany
+    @JoinTable(name = "pilot_mission",
+            joinColumns = @JoinColumn(name = "id_mission"),
+            inverseJoinColumns = @JoinColumn(name = "id_pilot"))
     private List<Pilot> pilots;
 
     private Integer flightHours;

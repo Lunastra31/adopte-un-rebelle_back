@@ -37,4 +37,5 @@ public class PilotImpl implements PilotService {
     public void delete(Integer id) {
         pilotRepository.deleteById(id);
     }
+
 }

@@ -34,4 +34,9 @@ public class StarshipImpl implements StarshipService {
     public void delete(Integer id) {
         starshipRepository.deleteById(id);
     }
+
+    @Override
+    public void changeStarshipStatus() {
+
+    }
 }
