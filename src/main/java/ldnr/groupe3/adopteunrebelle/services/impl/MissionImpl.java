@@ -65,4 +65,9 @@ public class MissionImpl implements MissionService {
             pilot.setPilotRank(PilotRank.CAPITAINE);
         }
     }
+
+    public void affectPilot(Integer id, List<Pilot> pilots){
+        Mission mission = missionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No mission has been found with the given ID :" + id));
+        mission.setPilots(pilots);
+    }
 }

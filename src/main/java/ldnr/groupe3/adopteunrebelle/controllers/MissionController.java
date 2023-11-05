@@ -1,6 +1,7 @@
 package ldnr.groupe3.adopteunrebelle.controllers;
 
 import ldnr.groupe3.adopteunrebelle.models.Mission;
+import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.services.MissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,4 +41,13 @@ public class MissionController {
         missionService.endMission(missionId, flightHours, mission.getMissionStatus());
         return ResponseEntity.accepted().build();
     }
+
+    @PutMapping(path = "/affect/{mission-id}")
+    public ResponseEntity<Void> editMission (@PathVariable("missionId") Integer id, @RequestBody List<Pilot> pilots) {
+        missionService.affectPilot(id, pilots);
+        return ResponseEntity.accepted().build();
+    }
+    //On utilise l'objet ResponseEntity pour de ne pas renvoyer l'objet lorsqu'on run la fonction
+    //Cela évite d'afficher l'objet et ses paramètres (sécurité)
+    // On met Void dans le diamant car il n'y aucun type d'objet
 }
