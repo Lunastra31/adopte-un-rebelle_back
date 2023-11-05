@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -36,7 +37,9 @@ public class StarshipImpl implements StarshipService {
     }
 
     @Override
-    public void changeStarshipStatus() {
-
+    @Transactional
+    public void changeStarshipStatus(Integer id, Starship starship) {
+        Starship currentStarship = starshipRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No starship has been found with the provided id :" + id));
+        currentStarship.setStarshipStatus(starship.getStarshipStatus());
     }
 }
