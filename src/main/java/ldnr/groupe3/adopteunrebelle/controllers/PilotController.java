@@ -1,6 +1,7 @@
 package ldnr.groupe3.adopteunrebelle.controllers;
 
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
+import ldnr.groupe3.adopteunrebelle.models.Starship;
 import ldnr.groupe3.adopteunrebelle.services.PilotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,18 @@ public class PilotController {
     @DeleteMapping("/{pilot-id}")
     public ResponseEntity<Void> DeletePilot(@PathVariable("pilot-id") Integer pilotId){
         pilotService.delete(pilotId);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/affect/{pilot-id}")
+    public ResponseEntity<Void> affectPilot(@PathVariable("pilot-id") Integer pilotId, @RequestBody Starship starship) {
+        pilotService.affectStarship(starship, pilotId);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/desaffect/{pilot-id}")
+    public ResponseEntity<Void> desaffectPilot(@PathVariable("pilot-id") Integer pilotId) {
+        pilotService.desaffectStarship(pilotId);
         return ResponseEntity.accepted().build();
     }
 }

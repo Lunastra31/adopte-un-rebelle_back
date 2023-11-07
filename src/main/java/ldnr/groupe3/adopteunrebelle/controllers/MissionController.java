@@ -42,8 +42,8 @@ public class MissionController {
         return ResponseEntity.accepted().build();
     }
 
-    @PutMapping(path = "/affect/{mission-id}")
-    public ResponseEntity<Void> editMission (@PathVariable("missionId") Integer id, @RequestBody List<Pilot> pilots) {
+    @PutMapping("/affect/{mission-id}")
+    public ResponseEntity<Void> editMission (@PathVariable("mission-id") Integer id, @RequestBody List<Pilot> pilots) {
         missionService.affectPilot(id, pilots);
         return ResponseEntity.accepted().build();
     }

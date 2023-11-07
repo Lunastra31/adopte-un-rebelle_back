@@ -1,5 +1,6 @@
 package ldnr.groupe3.adopteunrebelle.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ldnr.groupe3.adopteunrebelle.models.enums.StarshipStatus;
 import ldnr.groupe3.adopteunrebelle.models.enums.StarshipType;
 import lombok.AllArgsConstructor;
@@ -26,5 +27,6 @@ public class Starship extends AbstractEntity{
     private StarshipStatus starshipStatus;
 
     @OneToOne
+    @JoinColumn(name = "id_starship")
     private Pilot pilot;
 }

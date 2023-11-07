@@ -1,5 +1,6 @@
 package ldnr.groupe3.adopteunrebelle.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotBreed;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotRank;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotStatus;
