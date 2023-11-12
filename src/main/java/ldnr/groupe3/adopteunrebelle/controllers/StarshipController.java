@@ -38,15 +38,13 @@ public class StarshipController {
     }
 
     @PutMapping("/affect/{starship-id}")
-    public ResponseEntity<Void> affectPilot(@PathVariable("starship-id") Integer starshipId, @RequestBody Pilot pilot) {
-        starshipService.affectPilot(pilot, starshipId);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<Starship> affectPilot(@PathVariable("starship-id") Integer starshipId, @RequestBody Pilot pilot) {
+        return ResponseEntity.ok(starshipService.affectPilot(starshipId, pilot));
     }
 
     @PutMapping("/desaffect/{starship-id}")
-    public ResponseEntity<Void> desaffectPilot(@PathVariable("starship-id") Integer starshipId) {
-        starshipService.desaffectPilot(starshipId);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<Starship> desaffectPilot(@PathVariable("starship-id") Integer starshipId) {
+        return ResponseEntity.ok(starshipService.desaffectPilot(starshipId));
     }
 
 

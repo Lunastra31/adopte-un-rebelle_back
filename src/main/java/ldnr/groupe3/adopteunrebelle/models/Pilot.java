@@ -53,9 +53,7 @@ public class Pilot {
     @Enumerated(EnumType.STRING)
     private PilotRank pilotRank;
 
-    @OneToOne(mappedBy = "pilot")
-    @JsonManagedReference
-    private Starship starship;
+    private boolean hasStarship;
 
     @JsonBackReference
     @ManyToOne

@@ -41,31 +41,31 @@ public class PilotImpl implements PilotService {
         pilotRepository.deleteById(id);
     }
 
-    @Override
-    public void affectStarship(Starship starship, Integer pilotId) {
-        Pilot pilot = pilotRepository.findById(pilotId)
-                .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + pilotId));
-
-        if (pilot != null) {
-            // Assign the starship to the pilot
-            pilot.setStarship(starship);
-            starship.setPilot(pilot);
-
-            // Update the database
-            pilotRepository.save(pilot);
-            starshipRepository.save(starship);
-        }
-    }
-    @Override
-    public void desaffectStarship(Integer pilotId){
-        Pilot pilot = pilotRepository.findById(pilotId)
-                .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + pilotId));
-
-        Starship starship = pilot.getStarship();
-        if (starship != null) {
-            pilot.setStarship(null);
-            starship.setPilot(null);
-            starshipRepository.save(starship);
-        }
-    }
+//    @Override
+//    public void affectStarship(Starship starship, Integer pilotId) {
+//        Pilot pilot = pilotRepository.findById(pilotId)
+//                .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + pilotId));
+//
+//        if (pilot != null) {
+//            // Assign the starship to the pilot
+//            pilot.setStarship(starship);
+//            starship.setPilot(pilot);
+//
+//            // Update the database
+//            pilotRepository.save(pilot);
+//            starshipRepository.save(starship);
+//        }
+//    }
+//    @Override
+//    public void desaffectStarship(Integer pilotId){
+//        Pilot pilot = pilotRepository.findById(pilotId)
+//                .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + pilotId));
+//
+//        Starship starship = pilot.getStarship();
+//        if (starship != null) {
+//            pilot.setStarship(null);
+//            starship.setPilot(null);
+//            starshipRepository.save(starship);
+//        }
+//   }
 }

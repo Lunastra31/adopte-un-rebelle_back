@@ -3,6 +3,7 @@ package ldnr.groupe3.adopteunrebelle.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ldnr.groupe3.adopteunrebelle.models.enums.StarshipStatus;
 import ldnr.groupe3.adopteunrebelle.models.enums.StarshipType;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "starship")
 public class Starship {
 
@@ -33,7 +33,5 @@ public class Starship {
     private StarshipStatus starshipStatus;
 
     @OneToOne
-    @JoinColumn(name = "pilot_id")
-    @JsonBackReference
     private Pilot pilot;
 }

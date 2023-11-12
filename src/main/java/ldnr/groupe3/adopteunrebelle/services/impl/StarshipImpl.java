@@ -18,6 +18,7 @@ public class StarshipImpl implements StarshipService {
 
     private final StarshipRepository starshipRepository;
     private final PilotRepository pilotRepository;
+
     @Override
     public Integer save(Starship entity) {
         Starship starship = entity;
@@ -47,30 +48,31 @@ public class StarshipImpl implements StarshipService {
     }
 
     @Override
-    public void affectPilot(Pilot pilot, Integer starshipId) {
+    public Starship affectPilot(Integer starshipId, Pilot pilot) {
         Starship starship = starshipRepository.findById(starshipId)
                 .orElseThrow(() -> new EntityNotFoundException("No starship has been found with the provided id: " + starshipId));
 
-        if (starship != null) {
-            // Assign the starship to the pilot
-            pilot.setStarship(starship);
-            starship.setPilot(pilot);
+        starship.setPilot(pilot);
+        pilot.setHasStarship(true);
+        pilotRepository.save(pilot);
+        starshipRepository.save(starship);
+        return starship;
+    }
 
-            // Update the database
-            pilotRepository.save(pilot);
-            starshipRepository.save(starship);
-    }
-    }
     @Override
-    public void desaffectPilot(Integer starshipId) {
+    public Starship desaffectPilot(Integer starshipId) {
         Starship starship = starshipRepository.findById(starshipId)
-                .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + starshipId));
+                .orElseThrow(() -> new EntityNotFoundException("No starship has been found with the provided id: " + starshipId));
 
-        Pilot pilot = starship.getPilot();
-        if (starship != null) {
-            pilot.setStarship(null);
+        if (starship.getPilot() != null) {
+            Pilot pilot = starship.getPilot();
             starship.setPilot(null);
-            starshipRepository.save(starship);
+            pilot.setHasStarship(false);
+            pilotRepository.save(pilot);
         }
+
+        starshipRepository.save(starship);
+        return starship;
     }
 }
+

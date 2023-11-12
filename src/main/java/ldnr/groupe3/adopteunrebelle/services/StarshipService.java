@@ -6,6 +6,6 @@ import ldnr.groupe3.adopteunrebelle.models.Starship;
 public interface StarshipService extends AbstractService<Starship> {
     public void changeStarshipStatus(Integer id, Starship starship);
 
-    public void affectPilot(Pilot pilot, Integer id);
-    public void desaffectPilot(Integer id);
+    public Starship affectPilot(Integer id, Pilot pilot);
+    public Starship desaffectPilot(Integer id);
 }

@@ -35,15 +35,15 @@ public class PilotController {
         return ResponseEntity.accepted().build();
     }
 
-    @PutMapping("/affect/{pilot-id}")
-    public ResponseEntity<Void> affectStarship(@PathVariable("pilot-id") Integer pilotId, @RequestBody Starship starship) {
-        pilotService.affectStarship(starship, pilotId);
-        return ResponseEntity.accepted().build();
-    }
-
-    @PutMapping("/desaffect/{pilot-id}")
-    public ResponseEntity<Void> desaffectStarship(@PathVariable("pilot-id") Integer pilotId) {
-        pilotService.desaffectStarship(pilotId);
-        return ResponseEntity.accepted().build();
-    }
+//    @PutMapping("/affect/{pilot-id}")
+//    public ResponseEntity<Void> affectStarship(@PathVariable("pilot-id") Integer pilotId, @RequestBody Starship starship) {
+//        pilotService.affectStarship(starship, pilotId);
+//        return ResponseEntity.accepted().build();
+//    }
+//
+//    @PutMapping("/desaffect/{pilot-id}")
+//    public ResponseEntity<Void> desaffectStarship(@PathVariable("pilot-id") Integer pilotId) {
+//        pilotService.desaffectStarship(pilotId);
+//        return ResponseEntity.accepted().build();
+//    }
 }
