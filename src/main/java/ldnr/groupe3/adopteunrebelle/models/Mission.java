@@ -1,5 +1,7 @@
 package ldnr.groupe3.adopteunrebelle.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ldnr.groupe3.adopteunrebelle.models.enums.MissionStatus;
 import ldnr.groupe3.adopteunrebelle.models.enums.MissionType;
 import lombok.AllArgsConstructor;
@@ -14,23 +16,26 @@ import java.util.Set;
 
 
 @Data
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "mission")
-public class Mission extends AbstractEntity{
+public class Mission {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
+
     private int selectPilotCount;
 
     @Enumerated(EnumType.STRING)
     private MissionType missionType;
 
-    @ManyToMany
-    @JoinTable(name = "pilot_mission",
-            joinColumns = @JoinColumn(name = "id_mission"),
-            inverseJoinColumns = @JoinColumn(name = "id_pilot"))
+    @JsonManagedReference
+    @OneToMany(mappedBy = "mission")
     private List<Pilot> pilots;
 
     private Integer flightHours;

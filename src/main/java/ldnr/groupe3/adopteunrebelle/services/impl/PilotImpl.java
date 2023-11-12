@@ -42,26 +42,22 @@ public class PilotImpl implements PilotService {
     }
 
     @Override
-    @Transactional
     public void affectStarship(Starship starship, Integer pilotId) {
         Pilot pilot = pilotRepository.findById(pilotId)
                 .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + pilotId));
 
-        Starship currentStarship = pilot.getStarship();
-        if (currentStarship != null) {
-            currentStarship.setPilot(pilot);
+        if (pilot != null) {
+            // Assign the starship to the pilot
+            pilot.setStarship(starship);
+            starship.setPilot(pilot);
+
+            // Update the database
+            pilotRepository.save(pilot);
+            starshipRepository.save(starship);
         }
-
-        pilot.setStarship(currentStarship);
-        starship.setPilot(pilot);
-
-        // Mettez à jour le pilote et le vaisseau dans la même transaction
-        pilotRepository.save(pilot);
-        starshipRepository.save(starship);
     }
     @Override
-    @Transactional
-    public void desaffectStarship(Integer pilotId) {
+    public void desaffectStarship(Integer pilotId){
         Pilot pilot = pilotRepository.findById(pilotId)
                 .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + pilotId));
 
@@ -72,5 +68,4 @@ public class PilotImpl implements PilotService {
             starshipRepository.save(starship);
         }
     }
-
 }

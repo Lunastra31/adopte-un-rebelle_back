@@ -1,6 +1,9 @@
 package ldnr.groupe3.adopteunrebelle.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotBreed;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotRank;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotStatus;
@@ -16,12 +19,17 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "pilot")
-public class Pilot extends AbstractEntity{
+public class Pilot {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
 
     private String surname;
@@ -45,9 +53,12 @@ public class Pilot extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private PilotRank pilotRank;
 
-    @OneToOne
+    @OneToOne(mappedBy = "pilot")
+    @JsonManagedReference
     private Starship starship;
 
-    @ManyToMany(mappedBy = "pilots")
-    private List<Mission> missions;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
 }

@@ -1,5 +1,7 @@
 package ldnr.groupe3.adopteunrebelle.services;
 
+import ldnr.groupe3.adopteunrebelle.models.Pilot;
+
 import java.util.List;
 
 public interface AbstractService<T> {
@@ -10,4 +12,5 @@ public interface AbstractService<T> {
     T findById(Integer id);
 
     void delete(Integer id);
+
 }
