@@ -39,13 +39,13 @@ public class Pilot {
     @Enumerated(EnumType.STRING)
     private PilotBreed pilotBreed;
 
-    private LocalDate insDate;
+//    private LocalDate insDate;
 
     private Integer age;
 
     private Integer flightHours;
 
-    private int EndedMissionCount;
+    private Integer endedMissionCount;
 
     @Enumerated(EnumType.STRING)
     private PilotStatus pilotStatus;

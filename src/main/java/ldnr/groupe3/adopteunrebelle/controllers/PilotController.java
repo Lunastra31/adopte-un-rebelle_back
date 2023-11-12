@@ -16,8 +16,6 @@ import java.util.List;
 public class PilotController {
     private final PilotService pilotService;
 
-
-
     @PostMapping("/")
     public ResponseEntity<Integer> createPilot(@RequestBody Pilot pilot){
         return ResponseEntity.ok(pilotService.save(pilot));

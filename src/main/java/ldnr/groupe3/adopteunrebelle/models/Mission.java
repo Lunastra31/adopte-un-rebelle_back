@@ -29,8 +29,6 @@ public class Mission {
 
     private String name;
 
-    private int selectPilotCount;
-
     @Enumerated(EnumType.STRING)
     private MissionType missionType;
 

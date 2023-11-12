@@ -1,5 +1,6 @@
 package ldnr.groupe3.adopteunrebelle.controllers;
 
+import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.models.Starship;
 import ldnr.groupe3.adopteunrebelle.services.StarshipService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,18 @@ public class StarshipController {
     @DeleteMapping("/{starship-id}") // DELETE sur http://localhost/starship/ID
     public ResponseEntity<Void> DeleteStarship(@PathVariable("starship-id") Integer starshipId) {
         starshipService.delete(starshipId);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/affect/{starship-id}")
+    public ResponseEntity<Void> affectPilot(@PathVariable("starship-id") Integer starshipId, @RequestBody Pilot pilot) {
+        starshipService.affectPilot(pilot, starshipId);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/desaffect/{starship-id}")
+    public ResponseEntity<Void> desaffectPilot(@PathVariable("starship-id") Integer starshipId) {
+        starshipService.desaffectPilot(starshipId);
         return ResponseEntity.accepted().build();
     }
 

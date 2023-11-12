@@ -1,6 +1,8 @@
 package ldnr.groupe3.adopteunrebelle.services.impl;
 
+import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.models.Starship;
+import ldnr.groupe3.adopteunrebelle.repositories.PilotRepository;
 import ldnr.groupe3.adopteunrebelle.repositories.StarshipRepository;
 import ldnr.groupe3.adopteunrebelle.services.StarshipService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 public class StarshipImpl implements StarshipService {
 
     private final StarshipRepository starshipRepository;
+    private final PilotRepository pilotRepository;
     @Override
     public Integer save(Starship entity) {
         Starship starship = entity;
@@ -41,5 +44,33 @@ public class StarshipImpl implements StarshipService {
     public void changeStarshipStatus(Integer id, Starship starship) {
         Starship currentStarship = starshipRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No starship has been found with the provided id :" + id));
         currentStarship.setStarshipStatus(starship.getStarshipStatus());
+    }
+
+    @Override
+    public void affectPilot(Pilot pilot, Integer starshipId) {
+        Starship starship = starshipRepository.findById(starshipId)
+                .orElseThrow(() -> new EntityNotFoundException("No starship has been found with the provided id: " + starshipId));
+
+        if (starship != null) {
+            // Assign the starship to the pilot
+            pilot.setStarship(starship);
+            starship.setPilot(pilot);
+
+            // Update the database
+            pilotRepository.save(pilot);
+            starshipRepository.save(starship);
+    }
+    }
+    @Override
+    public void desaffectPilot(Integer starshipId) {
+        Starship starship = starshipRepository.findById(starshipId)
+                .orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id: " + starshipId));
+
+        Pilot pilot = starship.getPilot();
+        if (starship != null) {
+            pilot.setStarship(null);
+            starship.setPilot(null);
+            starshipRepository.save(starship);
+        }
     }
 }

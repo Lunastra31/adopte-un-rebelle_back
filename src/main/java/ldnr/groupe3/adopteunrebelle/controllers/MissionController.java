@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/mission")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:'4200")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class MissionController {
     private final MissionService missionService;
