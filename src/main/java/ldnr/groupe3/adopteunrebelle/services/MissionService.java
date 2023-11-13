@@ -14,7 +14,7 @@ public interface MissionService extends AbstractService<Mission>{
     public void rankChecker(Pilot pilot);
 
     @Transactional
-    public void affectPilot(Integer id, List<Pilot> pilots);
+    public Mission affectPilot(Integer id, List<Pilot> pilots);
 
     public List<Pilot> getPilotsByMissionId(int missionId);
 }

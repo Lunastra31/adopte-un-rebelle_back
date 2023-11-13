@@ -72,7 +72,7 @@ public class MissionImpl implements MissionService {
         }
     }
     @Transactional
-    public void affectPilot(Integer missionId, List<Pilot> pilots){
+    public Mission affectPilot(Integer missionId, List<Pilot> pilots){
         Mission mission = missionRepository.findById(missionId)
                 .orElseThrow(() -> new EntityNotFoundException("Mission not found with id: " + missionId));
 
@@ -82,7 +82,7 @@ public class MissionImpl implements MissionService {
         }
 
         mission.setPilots(pilots);
-        missionRepository.save(mission);
+        return missionRepository.save(mission);
     }
 
     public List<Pilot> getPilotsByMissionId(int missionId) {

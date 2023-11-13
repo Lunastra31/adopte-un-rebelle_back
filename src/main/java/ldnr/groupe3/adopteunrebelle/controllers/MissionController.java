@@ -37,15 +37,13 @@ public class MissionController {
     }
 
     @PutMapping("/{mission-id}")
-    public ResponseEntity<Void>  endMission(@PathVariable("mission-id") Integer missionId, @RequestBody Integer flightHours, Mission mission) {
-        missionService.endMission(missionId, flightHours, mission.getMissionStatus());
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<Integer> endMission(@PathVariable("mission-id") Integer missionId, @RequestBody Integer flightHours, Mission mission) {
+        return ResponseEntity.ok(missionService.endMission(missionId, flightHours, mission.getMissionStatus()));
     }
 
     @PutMapping("/affect/{mission-id}")
-    public ResponseEntity<Void> affectPilot (@PathVariable("mission-id") Integer id, @RequestBody List<Pilot> pilots) {
-        missionService.affectPilot(id, pilots);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<Mission> affectPilot (@PathVariable("mission-id") Integer id, @RequestBody List<Pilot> pilots) {
+        return ResponseEntity.ok(missionService.affectPilot(id, pilots));
     }
     //On utilise l'objet ResponseEntity pour de ne pas renvoyer l'objet lorsqu'on run la fonction
     //Cela évite d'afficher l'objet et ses paramètres (sécurité)
