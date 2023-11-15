@@ -2,6 +2,8 @@ package ldnr.groupe3.adopteunrebelle.controllers;
 
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.models.Starship;
+import ldnr.groupe3.adopteunrebelle.models.enums.PilotStatus;
+import ldnr.groupe3.adopteunrebelle.models.enums.StarshipStatus;
 import ldnr.groupe3.adopteunrebelle.services.StarshipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -47,5 +49,9 @@ public class StarshipController {
         return ResponseEntity.ok(starshipService.desaffectPilot(starshipId));
     }
 
+    @PutMapping("/{starship-id}")
+    public ResponseEntity<Starship> changeStarshipStatus(@PathVariable("starship-id") Integer id, @RequestBody StarshipStatus starshipStatus) {
+        return ResponseEntity.ok(starshipService.changeStarshipStatus(id, starshipStatus));
+    }
 
 }

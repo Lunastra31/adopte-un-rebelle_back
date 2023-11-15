@@ -2,6 +2,7 @@ package ldnr.groupe3.adopteunrebelle.services.impl;
 
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.models.Starship;
+import ldnr.groupe3.adopteunrebelle.models.enums.StarshipStatus;
 import ldnr.groupe3.adopteunrebelle.repositories.PilotRepository;
 import ldnr.groupe3.adopteunrebelle.repositories.StarshipRepository;
 import ldnr.groupe3.adopteunrebelle.services.StarshipService;
@@ -42,9 +43,10 @@ public class StarshipImpl implements StarshipService {
 
     @Override
     @Transactional
-    public void changeStarshipStatus(Integer id, Starship starship) {
+    public Starship changeStarshipStatus(Integer id, StarshipStatus starshipStatus) {
         Starship currentStarship = starshipRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No starship has been found with the provided id :" + id));
-        currentStarship.setStarshipStatus(starship.getStarshipStatus());
+        currentStarship.setStarshipStatus(starshipStatus);
+        return starshipRepository.save(currentStarship);
     }
 
     @Override

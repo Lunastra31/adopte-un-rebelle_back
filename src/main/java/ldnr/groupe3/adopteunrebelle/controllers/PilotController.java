@@ -1,7 +1,9 @@
 package ldnr.groupe3.adopteunrebelle.controllers;
 
+import ldnr.groupe3.adopteunrebelle.models.Mission;
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
 import ldnr.groupe3.adopteunrebelle.models.Starship;
+import ldnr.groupe3.adopteunrebelle.models.enums.PilotStatus;
 import ldnr.groupe3.adopteunrebelle.services.PilotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,11 @@ public class PilotController {
     public ResponseEntity<Void> DeletePilot(@PathVariable("pilot-id") Integer pilotId){
         pilotService.delete(pilotId);
         return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/{pilot-id}")
+    public ResponseEntity<Pilot> changePilotStatus(@PathVariable("pilot-id") Integer id, @RequestBody PilotStatus pilotStatus) {
+        return ResponseEntity.ok(pilotService.changePilotStatus(id, pilotStatus));
     }
 
 //    @PutMapping("/affect/{pilot-id}")

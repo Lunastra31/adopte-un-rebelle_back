@@ -1,11 +1,10 @@
 package ldnr.groupe3.adopteunrebelle.services.impl;
 
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
-import ldnr.groupe3.adopteunrebelle.models.Starship;
+import ldnr.groupe3.adopteunrebelle.models.enums.PilotStatus;
 import ldnr.groupe3.adopteunrebelle.repositories.PilotRepository;
 import ldnr.groupe3.adopteunrebelle.repositories.StarshipRepository;
 import ldnr.groupe3.adopteunrebelle.services.PilotService;
-import ldnr.groupe3.adopteunrebelle.services.StarshipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +38,14 @@ public class PilotImpl implements PilotService {
     @Override
     public void delete(Integer id) {
         pilotRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Pilot changePilotStatus(Integer id, PilotStatus pilotStatus) {
+        Pilot currentPilot = pilotRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No pilot has been found with the provided id :" + id));
+        currentPilot.setPilotStatus(pilotStatus);
+        return pilotRepository.save(currentPilot);
     }
 
 //    @Override
