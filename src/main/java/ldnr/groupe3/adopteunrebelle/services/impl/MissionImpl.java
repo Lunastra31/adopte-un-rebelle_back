@@ -85,7 +85,14 @@ public class MissionImpl implements MissionService {
         return missionRepository.save(mission);
     }
 
-    public List<Pilot> getPilotsByMissionId(int missionId) {
+    @Override
+    public List<Mission> findMissionsByPilotId(Integer pilotId) {
+        return missionRepository.findMissionsByPilotId(pilotId);
+    }
+
+    public List<Pilot> getPilotsByMissionId(Integer missionId) {
         return missionRepository.findPilotsByPilotsMissionId(missionId);
     }
+
+
 }

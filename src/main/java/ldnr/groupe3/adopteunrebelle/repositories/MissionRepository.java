@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MissionRepository extends JpaRepository<Mission, Integer> {
-    List<Pilot> findPilotsByPilotsMissionId(int missionId);
+    List<Pilot> findPilotsByPilotsMissionId(Integer missionId);
+    List<Mission> findMissionsByPilotId(Integer pilotId);
 }

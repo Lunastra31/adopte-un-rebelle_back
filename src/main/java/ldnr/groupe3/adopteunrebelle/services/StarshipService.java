@@ -9,4 +9,5 @@ public interface StarshipService extends AbstractService<Starship> {
 
     public Starship affectPilot(Integer id, Pilot pilot);
     public Starship desaffectPilot(Integer id);
+
 }

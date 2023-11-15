@@ -7,8 +7,8 @@ import ldnr.groupe3.adopteunrebelle.models.enums.MissionStatus;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface MissionService extends AbstractService<Mission>{
-   @Transactional
+public interface MissionService extends AbstractService<Mission> {
+    @Transactional
     public Integer endMission(Integer missionId, Integer flightHours, MissionStatus missionStatus);
 
     public void rankChecker(Pilot pilot);
@@ -16,5 +16,7 @@ public interface MissionService extends AbstractService<Mission>{
     @Transactional
     public Mission affectPilot(Integer id, List<Pilot> pilots);
 
-    public List<Pilot> getPilotsByMissionId(int missionId);
+    List<Mission> findMissionsByPilotId(Integer pilotId);
+
+
 }

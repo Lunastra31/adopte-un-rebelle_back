@@ -2,6 +2,7 @@ package ldnr.groupe3.adopteunrebelle.controllers;
 
 import ldnr.groupe3.adopteunrebelle.models.Mission;
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
+import ldnr.groupe3.adopteunrebelle.models.enums.MissionStatus;
 import ldnr.groupe3.adopteunrebelle.services.MissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class MissionController {
         return ResponseEntity.ok(missionService.findById(missionId));
     }
 
+    @GetMapping("/{mission-id}")
+    public ResponseEntity<List<Mission>> getMissionsByPilotsId(@PathVariable("pilot-id") Integer pilotId){
+        return ResponseEntity.ok(missionService.findMissionsByPilotId(pilotId));
+    }
+
     @DeleteMapping("/{mission-id}")
     public ResponseEntity<Void> deleteMission(@PathVariable("mission-id") Integer missionId){
         missionService.delete(missionId);
@@ -37,8 +43,8 @@ public class MissionController {
     }
 
     @PutMapping("/{mission-id}")
-    public ResponseEntity<Integer> endMission(@PathVariable("mission-id") Integer missionId, @RequestBody Integer flightHours, Mission mission) {
-        return ResponseEntity.ok(missionService.endMission(missionId, flightHours, mission.getMissionStatus()));
+    public ResponseEntity<Integer> endMission(@PathVariable("mission-id") Integer missionId, @RequestBody Integer flightHours, MissionStatus missionStatus) {
+        return ResponseEntity.ok(missionService.endMission(missionId, flightHours, missionStatus));
     }
 
     @PutMapping("/affect/{mission-id}")
