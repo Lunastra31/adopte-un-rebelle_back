@@ -34,7 +34,7 @@ public class Pilot {
 
     private String surname;
 
-    private boolean isTrainee;
+    private boolean Trainee;
 
     @Enumerated(EnumType.STRING)
     private PilotBreed pilotBreed;

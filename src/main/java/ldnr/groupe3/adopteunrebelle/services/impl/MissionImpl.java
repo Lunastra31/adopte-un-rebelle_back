@@ -43,34 +43,33 @@ public class MissionImpl implements MissionService {
 
     @Override
     @Transactional
-    public Integer endMission(Integer missionId, Integer flightHours, MissionStatus missionStatus) {
+    public Mission endMission(Integer missionId, Mission missionToClosed) {
         Mission mission = missionRepository.findById(missionId).orElseThrow(() -> new EntityNotFoundException("No mission has been found with the given ID :" + missionId));
-        mission.setFlightHours(flightHours);
-        mission.setMissionStatus(missionStatus);
+        mission.setFlightHours(missionToClosed.getFlightHours());
+        mission.setMissionStatus(missionToClosed.getMissionStatus());
         List<Pilot> pilotsInThisMission = mission.getPilots();
         pilotsInThisMission.forEach(pilot -> {
-            pilot.setFlightHours(pilot.getFlightHours() + flightHours);
+            pilot.setFlightHours(pilot.getFlightHours() + missionToClosed.getFlightHours());
             pilot.setEndedMissionCount(pilot.getEndedMissionCount() + 1);
-            pilot.setMission(null);
-            rankChecker(pilot);
+            pilot.setPilotRank(rankChecker(pilot.getFlightHours(), pilot.getEndedMissionCount()));
         });
 
-        return missionRepository.save(mission).getId();
+        return missionRepository.save(mission);
     }
 
     @Override
-    public void rankChecker(Pilot pilot) {
-        int flightHours = pilot.getFlightHours();
-        if (flightHours >= 500) {
-            pilot.setPilotRank(PilotRank.OFFICIER_DE_VOL);
-        } else if (flightHours >= 1500) {
-            pilot.setPilotRank(PilotRank.COMMANDANT);
-        } else if (flightHours >= 4000) {
-            pilot.setPilotRank(PilotRank.CAPITAINE);
-        } else if (flightHours >= 5000) {
-            pilot.setPilotRank(PilotRank.LIEUTENANT); // Ajusté pour éviter la redondance
+    public PilotRank rankChecker(Integer flightHours, Integer endedMissionCount) {
+     if (flightHours >= 1500 && flightHours <= 4000) {
+            return PilotRank.COMMANDANT;
+        } else if (flightHours >= 4000 && endedMissionCount == 1) {
+            return PilotRank.CAPITAINE;
+        } else if (flightHours >= 4000 && endedMissionCount == 3) {
+            return PilotRank.LIEUTENANT;
+        }      else  {
+            return PilotRank.OFFICIER_DE_VOL;
         }
     }
+
     @Transactional
     public Mission affectPilot(Integer missionId, List<Pilot> pilots){
         Mission mission = missionRepository.findById(missionId)
@@ -85,10 +84,10 @@ public class MissionImpl implements MissionService {
         return missionRepository.save(mission);
     }
 
-    @Override
-    public List<Mission> findMissionsByPilotId(Integer pilotId) {
-        return missionRepository.findMissionsByPilotId(pilotId);
-    }
+//    @Override
+//    public List<Mission> findMissionsByPilotId(Integer pilotId) {
+//        return missionRepository.findMissionsByPilotId(pilotId);
+//    }
 
     public List<Pilot> getPilotsByMissionId(Integer missionId) {
         return missionRepository.findPilotsByPilotsMissionId(missionId);

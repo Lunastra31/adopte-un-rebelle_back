@@ -31,10 +31,10 @@ public class MissionController {
         return ResponseEntity.ok(missionService.findById(missionId));
     }
 
-    @GetMapping("/{mission-id}")
-    public ResponseEntity<List<Mission>> getMissionsByPilotsId(@PathVariable("pilot-id") Integer pilotId){
-        return ResponseEntity.ok(missionService.findMissionsByPilotId(pilotId));
-    }
+//    @GetMapping("/{mission-id}")
+//    public ResponseEntity<List<Mission>> getMissionsByPilotsId(@PathVariable("pilot-id") Integer pilotId){
+//        return ResponseEntity.ok(missionService.findMissionsByPilotId(pilotId));
+//    }
 
     @DeleteMapping("/{mission-id}")
     public ResponseEntity<Void> deleteMission(@PathVariable("mission-id") Integer missionId){
@@ -43,8 +43,8 @@ public class MissionController {
     }
 
     @PutMapping("/{mission-id}")
-    public ResponseEntity<Integer> endMission(@PathVariable("mission-id") Integer missionId, @RequestBody Integer flightHours, MissionStatus missionStatus) {
-        return ResponseEntity.ok(missionService.endMission(missionId, flightHours, missionStatus));
+    public ResponseEntity<Mission> endMission(@PathVariable("mission-id") Integer missionId, @RequestBody Mission mission) {
+        return ResponseEntity.ok(missionService.endMission(missionId, mission));
     }
 
     @PutMapping("/affect/{mission-id}")

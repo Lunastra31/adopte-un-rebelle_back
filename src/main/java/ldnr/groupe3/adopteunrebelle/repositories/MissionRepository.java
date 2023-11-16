@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MissionRepository extends JpaRepository<Mission, Integer> {
     List<Pilot> findPilotsByPilotsMissionId(Integer missionId);
-    List<Mission> findMissionsByPilotId(Integer pilotId);
+    // List<Mission> findMissionsByPilotId(Integer pilotId);
 }
