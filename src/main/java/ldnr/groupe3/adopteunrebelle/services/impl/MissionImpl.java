@@ -64,9 +64,9 @@ public class MissionImpl implements MissionService {
         return PilotRank.OFFICIER_DE_VOL;
     }else if (flightHours >= 1500 && flightHours <= 4000) {
               return PilotRank.COMMANDANT;
-          } else if (flightHours >= 4000 && endedMissionCount == 1) {
+          } else if (flightHours >= 4000 && endedMissionCount < 3) {
               return PilotRank.CAPITAINE;
-          } else if (flightHours >= 4000 && endedMissionCount == 3) {
+          } else if (flightHours >= 4000 && endedMissionCount >= 3) {
               return PilotRank.LIEUTENANT;
           } else {
               return PilotRank.OFFICIER_DE_VOL;
