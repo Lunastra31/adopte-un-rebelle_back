@@ -52,6 +52,7 @@ public class MissionImpl implements MissionService {
             pilot.setFlightHours(pilot.getFlightHours() + missionToClosed.getFlightHours());
             pilot.setEndedMissionCount(pilot.getEndedMissionCount() + 1);
             pilot.setPilotRank(rankChecker(pilot.getFlightHours(), pilot.getEndedMissionCount(), pilot));
+            pilot.setTrainee(traineeChecker(pilot.getFlightHours()));
         });
 
         return missionRepository.save(mission);
@@ -59,19 +60,25 @@ public class MissionImpl implements MissionService {
 
     @Override
     public PilotRank rankChecker(Integer flightHours, Integer endedMissionCount, Pilot pilot) {
-    if (flightHours <= 500) {
-        pilot.setTrainee(true);
-        return PilotRank.OFFICIER_DE_VOL;
-    }else if (flightHours >= 1500 && flightHours <= 4000) {
-              return PilotRank.COMMANDANT;
-          } else if (flightHours >= 4000 && endedMissionCount < 3) {
-              return PilotRank.CAPITAINE;
-          } else if (flightHours >= 4000 && endedMissionCount >= 3) {
-              return PilotRank.LIEUTENANT;
-          } else {
-              return PilotRank.OFFICIER_DE_VOL;
-          }
-      }
+        if (flightHours >= 1500 && flightHours <= 4000) {
+            return PilotRank.COMMANDANT;
+        } else if (flightHours >= 4000 && endedMissionCount < 3) {
+            return PilotRank.CAPITAINE;
+        } else if (flightHours >= 4000 && endedMissionCount >= 3) {
+            return PilotRank.LIEUTENANT;
+        } else {
+            return PilotRank.OFFICIER_DE_VOL;
+        }
+    }
+
+    @Override
+    public Boolean traineeChecker(Integer flightHours) {
+        if (flightHours <= 500) {
+            return true;
+        }
+        return false;
+    }
+
 
 
     @Transactional

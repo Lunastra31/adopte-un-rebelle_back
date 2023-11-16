@@ -17,6 +17,8 @@ public interface MissionService extends AbstractService<Mission> {
     @Transactional
     public Mission affectPilot(Integer id, List<Pilot> pilots);
 
+    public Boolean traineeChecker(Integer flightHours);
+
 //    List<Mission> findMissionsByPilotId(Integer pilotId);
 
 
