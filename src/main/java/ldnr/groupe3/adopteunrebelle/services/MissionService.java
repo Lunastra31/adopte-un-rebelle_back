@@ -12,7 +12,7 @@ public interface MissionService extends AbstractService<Mission> {
     @Transactional
     public Mission endMission(Integer missionId, Mission mission);
 
-    public PilotRank rankChecker(Integer flightHours, Integer endedMissionCount);
+    public PilotRank rankChecker(Integer flightHours, Integer endedMissionCount, Pilot pilot);
 
     @Transactional
     public Mission affectPilot(Integer id, List<Pilot> pilots);

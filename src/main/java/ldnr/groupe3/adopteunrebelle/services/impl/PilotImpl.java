@@ -1,6 +1,7 @@
 package ldnr.groupe3.adopteunrebelle.services.impl;
 
 import ldnr.groupe3.adopteunrebelle.models.Pilot;
+import ldnr.groupe3.adopteunrebelle.models.enums.PilotRank;
 import ldnr.groupe3.adopteunrebelle.models.enums.PilotStatus;
 import ldnr.groupe3.adopteunrebelle.repositories.PilotRepository;
 import ldnr.groupe3.adopteunrebelle.repositories.StarshipRepository;
@@ -18,6 +19,7 @@ public class PilotImpl implements PilotService {
 
     private final PilotRepository pilotRepository;
     private final StarshipRepository starshipRepository;
+    private boolean Trainee;
 
     @Override
     public Integer save(Pilot entity) {
@@ -47,6 +49,12 @@ public class PilotImpl implements PilotService {
         currentPilot.setPilotStatus(pilotStatus);
         return pilotRepository.save(currentPilot);
     }
+
+    @Override
+    public void setTrainee(boolean Trainee) {
+        this.Trainee = Trainee;
+    }
+
 
 //    @Override
 //    public void affectStarship(Starship starship, Integer pilotId) {

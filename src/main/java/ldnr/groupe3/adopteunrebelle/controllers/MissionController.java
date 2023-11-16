@@ -51,6 +51,7 @@ public class MissionController {
     public ResponseEntity<Mission> affectPilot (@PathVariable("mission-id") Integer id, @RequestBody List<Pilot> pilots) {
         return ResponseEntity.ok(missionService.affectPilot(id, pilots));
     }
+
     //On utilise l'objet ResponseEntity pour de ne pas renvoyer l'objet lorsqu'on run la fonction
     //Cela évite d'afficher l'objet et ses paramètres (sécurité)
     // On met Void dans le diamant car il n'y aucun type d'objet
